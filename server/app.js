@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require("morgan");
+const { MongoClient } = require('mongodb');
+
+const url = 'mongodb://localhost:27017/de-node200-mongoose-blog-api';
 
 mongoose.connect('mongodb://localhost/my-blog');
 mongoose.Promise = Promise;
