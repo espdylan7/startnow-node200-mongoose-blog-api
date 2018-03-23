@@ -2,7 +2,7 @@ deployment:
   prod:
     branch: master
     heroku:
-      appname: dl-mongoose-blog-api
+      appname: de-node200-mongoose-blog-api
 machine:
   node:
     version: 8.1.4
