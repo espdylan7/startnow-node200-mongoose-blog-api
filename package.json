@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "run build && node server/index.js",
+    "start": "node server/index.js",
     "test": "mocha test/**/*.spec.js --exit",
     "submit": "mocha test/submission.spec.js"
   },
