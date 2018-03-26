@@ -1,13 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const morgan = require("morgan");
+const morgan = require('morgan')
 
-let mongooseUri = process.env.MONGODB_URI ? 'mongodb://heroku_5bll6n7g:uckcj5d9og8d5b9i60i03ghtfa@ds123259.mlab.com:23259/heroku_5bll6n7g'
-                : "mongodb://localhost/my-blog";
+var uri = process.env.MONGODB_URI;
+mongoose.connect(uri);
 
-mongoose.connect(mongooseUri);
 mongoose.Promise = Promise;
+
+//Get the default connection
+var db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const app = express();
 

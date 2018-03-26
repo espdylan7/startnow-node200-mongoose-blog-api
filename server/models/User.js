@@ -15,7 +15,6 @@ const UserSchema = new Schema({
     "blogs": [{
         "type": Schema.Types.ObjectId,
         "ref": "Blog"
-    }]
-});
+    }]}, { usePushEach: true });
 
 module.exports = mongoose.model('User', UserSchema);
