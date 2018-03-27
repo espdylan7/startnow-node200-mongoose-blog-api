@@ -3,31 +3,27 @@ const router = express.Router();
 const User = require("../models/User");
 
 router.get("/", (req, res) => {
-    //console.log(User)
     User.find()
         .then(users => {
             res.status(200).json(users);
         })
 });
 
-router.get("/:id", (req, res) => {
-    User.findById(req.params.id)
-        .then(user => {
-            if (!user) res.status(404).send();
-            res.status(200).json(user);
-            
-        })
-        .catch(err => res.status(500).send("bad"));
+router.get('/:id', (req, res) => {
+    var id = req.params.id;
+    User
+        .findById(id)
+        .then(users =>  (users ? (res.status(200).json(users)) : res.status(404).send()))
+        .catch(err => res.status(500).send('An internal server error has occured'));
 });
 
-router.post("/", (req, res) => {
-    
-    var newUser = new User(req.body);
-    newUser.save()
-    .then(user => { res.status(201).json(user)
-    
-    .catch(err => res.status(500).send("bad"));
-    })
+router.post('/', (req, res) => {
+    let newUser = new User(req.body);
+    newUser
+        .save(req.params.id)
+        .then(users => {
+            res.status(201).json(users);
+        })
 });
 
 router.put("/:id", (req, res) => {
@@ -39,16 +35,6 @@ router.put("/:id", (req, res) => {
     })
     .catch(err => res.status(500).send("bad"));
 });
-
-
-// router.delete('/:id', (req, res) => {
-//     var id = req.params.id;
-//     User
-//         .findByIdAndRemove(id)
-//         .then(users => {
-//             res.status(200).json(users);
-//         });
-// });
 
 router.delete('/:id', (req, res) => {
     const userId = req.params.id;
@@ -63,5 +49,6 @@ router.delete('/:id', (req, res) => {
         }
       });
   });
+
 
 module.exports = router;
