@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan')
 
-var uri = process.env.MONGODB_URI;
+var uri = process.env.MONGODB_URI || 'mongodb://localhost/my-blog';
 mongoose.connect(uri);
 
 mongoose.Promise = Promise;
