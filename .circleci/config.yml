@@ -2,9 +2,11 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-
-
-
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: foo-bar-123  
 version: 2
 jobs:
   build:
@@ -38,16 +40,6 @@ jobs:
         
       # run tests!
       - run: yarn test
-      
-      deployment:
-  production: # just a label; label names are completely up to you
-    branch: master
-    commands:
-      - ./deploy-to-production.sh
-  staging:
-    branch: staging
-    commands:
-      - ./deploy-to-staging.sh
 
 
 
