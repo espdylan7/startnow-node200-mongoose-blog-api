@@ -3,11 +3,17 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 deployment:
-  staging:
+  production: # just a label; label names are completely up to you
     branch: master
-    heroku:
-      appname: foo-bar-123
-      
+    commands:
+      - ./deploy-to-production.sh
+  staging:
+    branch: staging
+    commands:
+      - ./deploy-to-staging.sh
+
+
+
 version: 2
 jobs:
   build:
